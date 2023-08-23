@@ -11,14 +11,14 @@ export class AuthService {
 
   private readonly URL:string =environment.api;
 
-  constructor(private http:HttpClient,private cookie:CookieService) { }
+  constructor(private http:HttpClient) { }
 
  sendCredentials(email: string, password: string): Observable<any> {
     const body = {
       email,
       password
     }
-    console.log(this.URL)
+    console.log(this.URL,body)
     return this.http.post(`${this.URL}/auth/login`, body)
   }
 
