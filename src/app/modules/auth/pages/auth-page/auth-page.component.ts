@@ -40,6 +40,7 @@ export class AuthPageComponent implements OnInit{
     send():void{
     const {email,password} = this.formLogin.value;
     this.viewMessageError = this.formLogin.invalid;
+    console.log(email,password)
     this._authService.sendCredentials(email,password).subscribe((resOk)=>{
        console.log(resOk)
       this.router.navigate(['/','tracks'])
