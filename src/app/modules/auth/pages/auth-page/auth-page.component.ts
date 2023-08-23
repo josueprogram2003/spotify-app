@@ -37,22 +37,16 @@ export class AuthPageComponent implements OnInit{
     // console.log(this.formLogin)
   }
 
-   send(): void {
-    const { email, password } = this.formLogin.value
-    this._authService.sendCredentials(email, password)
-      //TODO: 200 <400
-      .subscribe(responseOk => { //TODO: Cuando el usuario credenciales Correctas ✔✔
-        console.log('Session iniciada correcta', responseOk);
-        const { tokenSession, data } = responseOk
-        this.cookie.set('token', tokenSession, 4, '/') //TODO:📌📌📌📌
-        this.router.navigate(['/', 'tracks'])
-      },
-        err => {//TODO error 400>=
-          this.errorInitSession = true
-          console.log('⚠⚠⚠⚠Ocurrio error con tu email o password');
-        })
-
+    send():void{
+    const {email,password} = this.formLogin.value;
+    this.viewMessageError = this.formLogin.invalid;
+    this._authService.sendCredentials(email,password).subscribe((resOk)=>{
+       console.log(resOk)
+      this.router.navigate(['/','tracks'])
+    }, err =>{
+      this.errorInitSession = true;
+      console.log(err)
+    });
   }
-
 
 }
